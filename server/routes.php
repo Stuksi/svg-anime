@@ -16,7 +16,7 @@ function registration_route() {
     return;
   }
 
-  unknown_route();
+  unknown_method();
 }
 
 function login_route() {
@@ -42,9 +42,14 @@ function login_route() {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $authorization = $db->query("SELECT EXISTS(SELECT FROM users WHERE username='$username' AND password='$password')")->fetch_assoc();
+    $user = $db->query("SELECT FROM users WHERE username='$username' AND password='$password'")->fetch_assoc();
 
-    if ($authorization == 1) {
+    if ($user != null) {
+      $id = $user['id'];
+      $token = random_bytes(64);
+
+      $db->query("UPDATE users SET token=$token WHERE id='$id'");
+
       echo(json_encode(['status' => 200]));
     } else {
       echo(json_encode(['status' => 401]));
@@ -53,7 +58,7 @@ function login_route() {
     return;
   }
 
-  unknown_route();
+  unknown_method();
 }
 
 function library_route() {
@@ -63,7 +68,7 @@ function library_route() {
   if ($method == 'GET') {
     $user_id = $_POST['user_id'];
 
-    $library = $db->query("SELECT svg FROM library WHERE user_id='$user_id' ORDER BY createdat")->fetch_all();
+    $library = $db->query("SELECT name, content FROM library WHERE user_id='$user_id' ORDER BY createdat")->fetch_all();
 
     echo(json_encode(['status' => 200, 'library' => $library]));
     return;
@@ -71,19 +76,24 @@ function library_route() {
 
   if ($method == 'POST') {
     $user_id = $_POST['user_id'];
-    $svg = $_POST['svg'];
+    $name = $_POST['name'];
+    $content = $_POST['content'];
 
-    $db->query("INSERT INTO library (user_id, svg) VALUES ('$user_id', '$svg')");
+    $db->query("INSERT INTO library (user_id, name, content) VALUES ('$user_id', '$name', '$content')");
 
     echo(json_encode(['status' => 200]));
     return;
   }
 
-  unknown_route();
+  unknown_method();
 }
 
 function unknown_route() {
-  echo(json_encode(['status' => 404]));;
+  echo(json_encode(['status' => 404]));
+}
+
+function unknown_method() {
+  echo(json_encode(['status' => 400]));
 }
 
 ?>

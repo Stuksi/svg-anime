@@ -23,6 +23,7 @@ function db_setup() {
       id        INT         NOT NULL AUTO_INCREMENT,
       username  VARCHAR(16) NOT NULL UNIQUE,
       password  VARCHAR(24) NOT NULL,
+      token     VARCHAR(64),
       createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id)
     )
@@ -30,10 +31,11 @@ function db_setup() {
 
   $db->query('
     CREATE TABLE library (
-      id        INT       NOT NULL AUTO_INCREMENT,
-      user_id   INT       NOT NULL,
-      svg       TEXT      NOT NULL,
-      createdat TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      id        INT         NOT NULL AUTO_INCREMENT,
+      user_id   INT         NOT NULL,
+      name      VARCHAR(32) NOT NULL,
+      content   TEXT        NOT NULL,
+      createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id),
       FOREIGN KEY (user_id) REFERENCES users(id)
     )
