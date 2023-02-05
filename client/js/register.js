@@ -6,9 +6,7 @@ async function register() {
   const passwordConfirmation = document.getElementById('confirm-password').value;
 
   if (password !== passwordConfirmation) {
-  console.log(password);
-  console.log(passwordConfirmation);
-  return;
+    return;
   }
 
   const registration = await post('register', { username, password });

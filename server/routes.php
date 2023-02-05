@@ -8,11 +8,19 @@ function registration_route() {
 
   if ($method == 'POST') {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $exists = $db->query("SELECT EXISTS(SELECT FROM users WHERE username='$username')")->fetch_assoc();
 
-    $db->query("INSERT INTO users (username, password) VALUES ('$username', '$password')");
+    if ($exists) {
+      echo(json_encode(['status' => 400]));
+    } else {
+      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $token = random_bytes(64);
 
-    echo(json_encode(['status' => 200]));
+      $db->query("INSERT INTO users (username, password, token) VALUES ('$username', '$password', '$token')");
+
+      echo(json_encode(['status' => 200, 'token' => $token]));
+    }
+
     return;
   }
 
@@ -27,9 +35,9 @@ function login_route() {
     $id = $_GET['id'];
     $token = $_GET['token'];
 
-    $authorization = $db->query("SELECT EXISTS(SELECT FROM users WHERE id='$id' AND token='$token')")->fetch_assoc();
+    $authorized = $db->query("SELECT EXISTS(SELECT FROM users WHERE id='$id' AND token='$token')")->fetch_assoc();
 
-    if ($authorization == 1) {
+    if ($authorized) {
       echo(json_encode(['status' => 200]));
     } else {
       echo(json_encode(['status' => 401]));
