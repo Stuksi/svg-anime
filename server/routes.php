@@ -50,7 +50,7 @@ function login_route() {
 
       $db->query("UPDATE users SET token=$token WHERE id='$id'");
 
-      echo(json_encode(['status' => 200]));
+      echo(json_encode(['status' => 200, 'token' => $token]));
     } else {
       echo(json_encode(['status' => 401]));
     }
