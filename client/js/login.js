@@ -1,8 +1,8 @@
 import { post } from './api.js';
 
 async function login() {
-  const username = document.getElementById('log-username');
-  const password = document.getElementById('log-password');
+  const username = document.getElementById('log-username').value;
+  const password = document.getElementById('log-password').value;
 
   const authentication = await post('login', { username, password });
 

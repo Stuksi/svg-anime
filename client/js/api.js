@@ -1,14 +1,20 @@
 import env from './env.js';
 
 async function api(url, method, body) {
+  const data = new FormData();
   const token = localStorage.getItem('token');
-  const response = fetch(`${env.SERVER_API}/${url}`, {
+
+  for (const key in body) {
+    data.append(key, body[key]);
+  }
+
+  const response = await fetch(`${env.SERVER_API}/${url}`, {
     method: method,
     headers: {
-      'Content-Type': 'application/json',
+      'Accept': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify(body)
+    body: data
   });
 
   return JSON.parse(response);
