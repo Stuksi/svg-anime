@@ -1,7 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Content-Type,Authorization');
+header('Access-Control-Allow-Headers: Accept,Authorization');
 
 require_once 'routes.php';
 

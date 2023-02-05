@@ -8,15 +8,17 @@ function registration_route() {
 
   if ($method == 'POST') {
     $username = $_POST['username'];
-    $exists = $db->query("SELECT EXISTS(SELECT FROM users WHERE username='$username')")->fetch_assoc();
+    $users = $db->query("SELECT * FROM users WHERE username='$username'");
 
-    if ($exists) {
+    if ($users->num_rows > 0) {
       echo(json_encode(['status' => 400]));
     } else {
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $token = random_bytes(64);
+      $token = base64_encode(random_bytes(32));
 
       $db->query("INSERT INTO users (username, password, token) VALUES ('$username', '$password', '$token')");
+      error_log($db->error);
+      error_log(strlen($token));
 
       echo(json_encode(['status' => 200, 'token' => $token]));
     }
@@ -35,12 +37,12 @@ function login_route() {
     $id = $_GET['id'];
     $token = $_GET['token'];
 
-    $authorized = $db->query("SELECT EXISTS(SELECT FROM users WHERE id='$id' AND token='$token')")->fetch_assoc();
+    $users = $db->query("SELECT * FROM users WHERE id='$id' AND token='$token'");
 
-    if ($authorized) {
-      echo(json_encode(['status' => 200]));
+    if ($users->num_rows > 0) {
+      http_response_code(200);
     } else {
-      echo(json_encode(['status' => 401]));
+      http_response_code(401);
     }
 
     return;
@@ -50,17 +52,18 @@ function login_route() {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $user = $db->query("SELECT FROM users WHERE username='$username' AND password='$password'")->fetch_assoc();
+    $user = $db->query("SELECT id FROM users WHERE username='$username' AND password='$password'")->fetch_assoc();
 
     if ($user != null) {
       $id = $user['id'];
-      $token = random_bytes(64);
+      $token = bin2hex(random_bytes(64));
 
       $db->query("UPDATE users SET token=$token WHERE id='$id'");
 
-      echo(json_encode(['status' => 200, 'token' => $token]));
+      http_response_code(200);
+      echo(json_encode(['token' => $token]));
     } else {
-      echo(json_encode(['status' => 401]));
+      http_response_code(401);
     }
 
     return;

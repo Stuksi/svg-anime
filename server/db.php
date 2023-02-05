@@ -15,14 +15,14 @@ function db_connection() {
 function db_setup() {
   $db = db_connection();
 
-  $db->query('DROP TABLE library');
-  $db->query('DROP TABLE users');
+  $db->query('DROP TABLE IF EXISTS library');
+  $db->query('DROP TABLE IF EXISTS users');
 
   $db->query('
     CREATE TABLE users (
       id        INT         NOT NULL AUTO_INCREMENT,
       username  VARCHAR(16) NOT NULL UNIQUE,
-      password  VARCHAR(24) NOT NULL,
+      password  VARCHAR(60) NOT NULL,
       token     VARCHAR(64),
       createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id)

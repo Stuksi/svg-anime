@@ -9,7 +9,7 @@ async function register() {
     return;
   }
 
-  const registration = await post('register', { username, password });
+  const registration = await post('registration', { username, password });
 
   if (registration['status'] === 400) {
     return;
