@@ -7,6 +7,7 @@ async function api(url, method, body) {
   for (const key in body) {
     data.append(key, body[key]);
   }
+  console.log("mnogo stranno")
 
   const response = await fetch(`${env.SERVER_API}/${url}`, {
     method: method,
@@ -16,7 +17,8 @@ async function api(url, method, body) {
     },
     body: data
   });
-
+  console.log("mnogo stranno")
+  console.log(response)
   return JSON.parse(response);
 }
 

@@ -6,10 +6,6 @@ async function login() {
 
   const authentication = await post('login', { username, password });
 
-  if (authentication['status'] === 401) {
-    return;
-  }
-
   localStorage.setItem('token', authentication['token']);
   location.href = '../html/home.html';
 }

@@ -1,0 +1,29 @@
+#svg-gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-wrapper {
+    /* height: 50px;
+    width: 50px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.svg {
+    margin-top: 2%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+.svg-wrapper:hover {
+    filter: brightness(0.75);
+    transform: scale(1.2);
+}
+

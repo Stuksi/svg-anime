@@ -6,16 +6,14 @@ async function register() {
   const passwordConfirmation = document.getElementById('confirm-password').value;
 
   if (password !== passwordConfirmation) {
+    alert("Typ si");
     return;
   }
 
   const registration = await post('registration', { username, password });
 
-  if (registration['status'] === 400) {
-    return;
-  }
-
   localStorage.setItem('token', registration['token']);
+  localStorage.setItem('user_id', registration['user_id']);
   location.href = '../html/home.html';
 }
 

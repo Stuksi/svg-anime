@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="../js/authorization.js"></script>
+        <!-- <script src="../js/authorization.js"></script> -->
 
         <link rel="stylesheet"  type="text/css" href="../css/index.css">
         <link rel="stylesheet"  type="text/css" href="../css/nav-bar.css">
@@ -17,7 +17,7 @@
             <div class="navbar-links">
               <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
+                <li><a href="library.html">Library</a></li>
                 <li><a href="#">Account</a></li>
               </ul>
             </div>
@@ -30,12 +30,13 @@
                 <section id="svg-render"></section>
                 <section id="svg-control-panel">
                   <h2>Control Panel</h2>
-                  <button type="Modify1">Modify1</button>
+                  <button id="saveSVG" onclick="saveSVG()">Save SVG</button>
                   <button type="Modify2">Modify3</button>
                   <button type="Modify3">Modify2</button>
                 </section>
             </div>
         </div>
+        <script src="../js/save-svj.js"></script>
+        <script src="../js/render.js"></script>
     </body>
-    <script src="../js/render.js"></script>
 </html>

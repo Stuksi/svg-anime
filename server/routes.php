@@ -11,6 +11,7 @@ function registration_route() {
     $users = $db->query("SELECT * FROM users WHERE username='$username'");
 
     if ($users->num_rows > 0) {
+      http_response_code(400);
       echo(json_encode(['status' => 400]));
     } else {
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -19,8 +20,10 @@ function registration_route() {
       $db->query("INSERT INTO users (username, password, token) VALUES ('$username', '$password', '$token')");
       error_log($db->error);
       error_log(strlen($token));
-
-      echo(json_encode(['status' => 200, 'token' => $token]));
+    
+      $user_id = $db->query("SELECT id FROM users WHERE username='$username'")->fetch_assoc();
+      http_response_code(200);
+      echo(json_encode(['token' => $token, 'user_id' => $user_id]));
     }
 
     return;
@@ -50,22 +53,25 @@ function login_route() {
 
   if ($method == 'POST') {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $users = $db->query("SELECT id, password FROM users WHERE username='$username'");
+    
+    if ($users->num_rows > 0) {
+      $user = $users->fetch_assoc();
+      $user_id = $user['id'];
+      $password = $user['password'];
 
-    $user = $db->query("SELECT id FROM users WHERE username='$username' AND password='$password'")->fetch_assoc();
-
-    if ($user != null) {
-      $id = $user['id'];
-      $token = bin2hex(random_bytes(64));
-
-      $db->query("UPDATE users SET token=$token WHERE id='$id'");
-
-      http_response_code(200);
-      echo(json_encode(['token' => $token]));
-    } else {
-      http_response_code(401);
+      if (password_verify($_POST['password'], $password))
+      {
+        $token = base64_encode(random_bytes(32));
+        $db->query("UPDATE users SET token='$token' WHERE id=$user_id");
+  
+        echo(json_encode(['token' => $token, 'user_id' => $user_id]));
+        http_response_code(200);
+        return;
+      }
     }
 
+    http_response_code(401);
     return;
   }
 
@@ -77,20 +83,18 @@ function library_route() {
   $db = db_connection();
 
   if ($method == 'GET') {
-    $user_id = $_POST['user_id'];
-
-    $library = $db->query("SELECT name, content FROM library WHERE user_id='$user_id' ORDER BY createdat")->fetch_all();
-
+    $user_id = $_GET['user_id'];
+    $library = $db->query("SELECT name, content FROM library WHERE user_id='$user_id' ORDER BY createdat")->fetch_all(MYSQLI_ASSOC);
     echo(json_encode(['status' => 200, 'library' => $library]));
     return;
   }
 
   if ($method == 'POST') {
-    $user_id = $_POST['user_id'];
+    $user_id = (int)$_POST['user_id'];
     $name = $_POST['name'];
     $content = $_POST['content'];
 
-    $db->query("INSERT INTO library (user_id, name, content) VALUES ('$user_id', '$name', '$content')");
+    $db->query("INSERT INTO library (user_id, name, content) VALUES ($user_id, '$name', '$content')");
 
     echo(json_encode(['status' => 200]));
     return;
