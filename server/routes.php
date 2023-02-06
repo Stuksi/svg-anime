@@ -54,7 +54,7 @@ function login_route() {
   if ($method == 'POST') {
     $username = $_POST['username'];
     $users = $db->query("SELECT id, password FROM users WHERE username='$username'");
-    
+
     if ($users->num_rows > 0) {
       $user = $users->fetch_assoc();
       $user_id = $user['id'];
@@ -64,7 +64,7 @@ function login_route() {
       {
         $token = base64_encode(random_bytes(32));
         $db->query("UPDATE users SET token='$token' WHERE id=$user_id");
-  
+
         echo(json_encode(['token' => $token, 'user_id' => $user_id]));
         http_response_code(200);
         return;

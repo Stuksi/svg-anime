@@ -5,12 +5,20 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
+function registerClick() {
+    let children = this.children;
+    codeInput= children[1].outerHTML;
+    localStorage.setItem('codeInput', codeInput);
+    document.location.href = '../html/home.html';
+}
+
 function appendElement(element)
 {
     svgId = "".concat("svg-", element.name);
     svgWrapper = document.createElement("div");
     svgWrapper.setAttribute('class', 'svg-wrapper');
     svgWrapper.setAttribute('id', svgId);
+    svgWrapper.addEventListener("click", registerClick);
     document.getElementById("svg-gallery").appendChild(svgWrapper);
 
 
@@ -22,12 +30,11 @@ function appendElement(element)
     svg = htmlToElement(element.content);
     svg.setAttribute('class', 'svg');
     document.getElementById(svgId).appendChild( svg);
-
 }
 
 function requestSVGs() {
 
-    fetch(`http://0.0.0.0:3000/library/?user_id=1`)
+    fetch(`http://0.0.0.0:3000/library/?user_id=2`)
     .then(response => response.json())
     .then(response => {
 
@@ -39,3 +46,10 @@ function requestSVGs() {
 }
 
 window.onload = requestSVGs();
+
+document.addEventListener("svgWrapperClicked", function(event) {
+    let children = event.detail.children;
+    console.log(children);
+  });
+
+

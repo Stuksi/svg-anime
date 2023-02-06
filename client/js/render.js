@@ -19,3 +19,7 @@ function renderSVG()
 
 codeInput.addEventListener('input', renderSVG);
 document.addEventListener("DOMContentLoaded", renderSVG);
+
+var inputTest = localStorage.getItem('codeInput');
+codeInput.value = inputTest;
+localStorage.removeItem('codeInput');
