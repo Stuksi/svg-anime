@@ -12,8 +12,7 @@ async function api(url, method, body) {
   const response = await fetch(`${env.SERVER_API}/${url}`, {
     method: method,
     headers: {
-      'Accept': 'application/json',
-      'Authorization': (token !== null ? `Bearer ${token}` : undefined)
+      // 'Authorization': `Bearer ${token}`
     },
     body: data
   });

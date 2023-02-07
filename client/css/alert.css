@@ -1,9 +1,18 @@
-.alert {
+#alert {
+  position: absolute;
+  top: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30vw;
-  height: 15vh;
+  width: 70vw;
+  height: 5vh;
+  opacity: 0;
+  animation: fade 2s linear;
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0 }
+  15%, 85% { opacity: 1 }
 }
 
 .alert-success {
@@ -11,5 +20,5 @@
 }
 
 .alert-error {
-  background-color: #5F021F;
+  background-color: #af1a49;
 }

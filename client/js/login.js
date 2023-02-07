@@ -4,6 +4,11 @@ async function login() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
+  if (username === '' || password === '') {
+    alertError('Please enter all fields!');
+    return;
+  }
+
   const authentication = await post('login', { username, password });
 
   if (authentication.error === undefined) {
@@ -12,4 +17,7 @@ async function login() {
   }
 }
 
-window.login = login;
+document.getElementById('login').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  await login();
+});

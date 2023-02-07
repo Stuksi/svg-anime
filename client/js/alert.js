@@ -1,29 +1,25 @@
 function alertElement(message) {
-  return document.createElement(`
-    <div class="alert">
-      <span class="alert-message">${message}</span>
-    </div>
-  `);
+  const element = document.createElement('div');
+
+  element.setAttribute('id', 'alert');
+  element.innerHTML = `<span class="alert-message">${message}</span>`;
+
+  return element;
 }
 
-function alertHandle(element) {
-  element.style.visibility = 'visible';
-  element.style.opacity = '1';
+function alert(type, message) {
+  document.getElementById('alert')?.remove();
 
-  setTimeout(() => {
-    element.style.visibility = 'hidden';
-    element.style.opacity = '0';
-  }, 3000);
+  const element = alertElement(message);
+  element.classList.add(`alert-${type}`);
+
+  document.body.appendChild(element);
 }
 
 export function alertError(message) {
-  const element = alertElement(message);
-  element.classList.add('alert-error');
-  alertHandle(element);
+  alert('error', message);
 }
 
 export function alertSuccess(message) {
-  const element = alertElement(message);
-  element.classList.add('alert-success');
-  alertHandle(element);
+  alert('success', message);
 }
