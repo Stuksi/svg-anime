@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"  type="text/css" href="../css/register.css">
+
+  <!-- <script type="module" src="../js/authorization.js"></script> -->
+
+  <title>SVG-Anime</title>
+</head>
+<body>
+  <script type="module" src="../js/register.js"></script>
+  <div class="registerPage">
+    <form id="registration">
+      <h2>Create Your Account</h2>
+      <div class="form-group">
+        <label for="reg-username">Username</label>
+        <input type="text" id="reg-username" />
+      </div>
+      <div class="form-group">
+        <label for="reg-password">Password</label>
+        <input type="password" id="reg-password" />
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" />
+      </div>
+      <input type="submit" value="Register" onclick="register()" class="submit-btn"/>
+      <span class="message">Already registered? <a href="login.html">Sign In</a></span>
+    </form>
+  </div>
+</body>
+</html>

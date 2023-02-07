@@ -1,20 +1,23 @@
 #svg-gallery {
+
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap:wrap;
 }
 
 .svg-wrapper {
-    /* height: 50px;
-    width: 50px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease-in-out;
+    margin:3em;
 }
-
+.svg-wrapper p {
+    margin-bottom: 5px;
+}
 .svg {
     margin-top: 2%;
     border-width: 2px;
@@ -23,6 +26,7 @@
 }
 
 .svg-wrapper:hover {
+    cursor: pointer;
     filter: brightness(0.75);
     transform: scale(1.2);
 }
