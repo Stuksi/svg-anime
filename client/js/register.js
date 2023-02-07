@@ -20,7 +20,6 @@ async function register() {
 
   if (registration.error === undefined) {
     localStorage.setItem('token', registration['token']);
-    localStorage.setItem('user_id', registration['user_id']);
     location.href = '../html/home.html';
   }
 }
