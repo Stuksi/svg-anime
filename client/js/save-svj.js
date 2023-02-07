@@ -1,7 +1,10 @@
 function saveSVG() {
   let svg_code = document.getElementById("code-input").value
-  if (!svg_code) {
-    alert("No svg detected!");
+  const svgRegex = /<svg(?:.*?)>(.*?)<\/svg>/s;
+  const match = svgRegex.exec(svg_code.trim());
+
+  if (!svg_code || !match) {
+    alert("No valid svg detected!");
     return;
   }
 
