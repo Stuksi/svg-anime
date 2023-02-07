@@ -12,7 +12,7 @@ async function api(url, method, body) {
   const response = await fetch(`${env.SERVER_API}/${url}`, {
     method: method,
     headers: {
-      // 'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
     body: data
   });

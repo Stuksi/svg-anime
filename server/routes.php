@@ -4,8 +4,11 @@ require_once 'db.php';
 
 function registration_route() {
   $method = $_SERVER['REQUEST_METHOD'];
-  $db = db_connection();
+  if ($method == 'OPTIONS') {
+    return render(200, ['success' => 'Success!']);
+  }
 
+  $db = db_connection();
   if ($method == 'POST') {
     $username = $_POST['username'];
     if (strlen($username) < 4 || strlen($username) > 16) {
@@ -37,8 +40,11 @@ function registration_route() {
 
 function login_route() {
   $method = $_SERVER['REQUEST_METHOD'];
-  $db = db_connection();
+  if ($method == 'OPTIONS') {
+    return render(200, ['success' => 'Success!']);
+  }
 
+  $db = db_connection();
   if ($method == 'GET') {
     $token = authorization_token();
 
@@ -75,12 +81,16 @@ function login_route() {
 }
 
 function library_route() {
+  $method = $_SERVER['REQUEST_METHOD'];
+  if ($method == 'OPTIONS') {
+    return render(200, ['success' => 'Success!']);
+  }
+
   $token = authorization_token();
   if ($token == null) {
     return render(401, ['error' => 'Unauthorized access!']);
   }
 
-  $method = $_SERVER['REQUEST_METHOD'];
   $db = db_connection();
   $current_user = $db->query("SELECT * FROM users WHERE token='$token'")->fetch_assoc();
 
