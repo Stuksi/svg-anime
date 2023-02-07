@@ -1,0 +1,15 @@
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 15vh;
+}
+
+.alert-success {
+  background-color: #99CB0E;
+}
+
+.alert-error {
+  background-color: #5F021F;
+}

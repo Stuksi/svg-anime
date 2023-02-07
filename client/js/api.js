@@ -1,4 +1,5 @@
 import env from './env.js';
+import { alertError, alertSuccess } from './alert.js';
 
 async function api(url, method, body) {
   const data = new FormData();
@@ -7,19 +8,26 @@ async function api(url, method, body) {
   for (const key in body) {
     data.append(key, body[key]);
   }
-  console.log("mnogo stranno")
 
   const response = await fetch(`${env.SERVER_API}/${url}`, {
     method: method,
     headers: {
       'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': (token !== null ? `Bearer ${token}` : undefined)
     },
     body: data
   });
-  console.log("mnogo stranno")
-  console.log(response)
-  return JSON.parse(response);
+  const json = await response.json();
+
+  if (response.status < 200 || response.status > 299) {
+    alertError(json.error);
+  }
+
+  if (json.success !== undefined) {
+    alertSuccess(json.success);
+  }
+
+  return json;
 }
 
 export async function get(url) {
