@@ -29,7 +29,7 @@ function appendElement(element)
 
     svg = htmlToElement(element.content);
     svg.setAttribute('class', 'svg');
-    document.getElementById(svgId).appendChild( svg);
+    document.getElementById(svgId).appendChild(svg);
 }
 
 function requestSVGs() {
@@ -46,10 +46,5 @@ function requestSVGs() {
 }
 
 window.onload = requestSVGs();
-
-document.addEventListener("svgWrapperClicked", function(event) {
-    let children = event.detail.children;
-    console.log(children);
-  });
 
 
