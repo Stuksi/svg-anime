@@ -1,7 +1,5 @@
 #svg-gallery {
-
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap:wrap;
@@ -17,12 +15,18 @@
 }
 .svg-wrapper p {
     margin-bottom: 5px;
+
 }
+
 .svg {
+    width: 500px;
+    height: 500px;
     margin-top: 2%;
-    border-width: 2px;
+    border-width: 4px;
     border-style: solid;
     border-color: black;
+    border-radius: 20px;
+    box-shadow: 1px 1px grey, -0.5em 0 0.2em grey;
 }
 
 .svg-wrapper:hover {
@@ -31,3 +35,7 @@
     transform: scale(1.2);
 }
 
+p {
+    font-size: 30px;
+    color: black;
+}

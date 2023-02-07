@@ -1,3 +1,6 @@
+body {
+    background-color: #f1f1f1;
+}
 #container {
     display: flex;
     flex-direction: row;
@@ -8,7 +11,6 @@
     width: 50%;
     padding: 1em;
     box-sizing: border-box;
-    background-color: #f1f1f1;
 }
 
 #code-input {
@@ -17,6 +19,8 @@
     height: 100%;
     box-sizing: border-box;
     resize: none;
+    border: 2px solid grey;
+    border-radius: 5px;
 }
 
 #svg-section {
@@ -26,7 +30,6 @@
     width: 50%;
     padding: 1em;
     box-sizing: border-box;
-    background-color: #fff;
 }
 
 #svg-render {
@@ -34,16 +37,21 @@
     align-items: center;
     justify-content: center;
     height: 50%;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: white;
 }
 
 #svg-control-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #000;
+    border: 2px solid grey;
+    border-radius: 5px;
     padding: 1em;
     flex-grow: 1;
     height: 50%;
+    background-color: white;
 }
 
 #svg-control-panel h2 {
@@ -52,5 +60,29 @@
 }
 
 #saveSVG {
-    color: green;
+
+    border: 2px solid grey;
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    color: #0d172a;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Basier circle", "Helvetica Neue",Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 1rem 1.6rem;
+    text-align: center;
+    text-decoration: none #0d172a solid;
+    text-decoration-thickness: auto;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#saveSVG:hover {
+    background-color: #1e293b;
+    color: #fff;
 }
