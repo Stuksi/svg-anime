@@ -100,7 +100,7 @@ function library_route() {
 
   if ($method == 'GET') {
     $user_id = $current_user['id'];
-    $library = $db->query("SELECT name, content FROM library WHERE user_id=$user_id]' ORDER BY createdat")->fetch_all(MYSQLI_ASSOC);
+    $library = $db->query("SELECT name, content FROM library WHERE user_id=$user_id ORDER BY createdat")->fetch_all(MYSQLI_ASSOC);
 
     return render(200, ['library' => $library]);
   }
@@ -118,9 +118,9 @@ function library_route() {
     }
 
     $content = $_POST['content'];
-    if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
-      return render(400, ['error' => 'SVG is not valid!']);
-    }
+    // if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
+    //   return render(400, ['error' => 'SVG is not valid!']);
+    // }
 
     $db->query("INSERT INTO library (user_id, name, content) VALUES ($user_id, '$name', '$content')");
 

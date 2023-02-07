@@ -14,7 +14,7 @@ async function api(url, method, body) {
     headers: {
       'Authorization': `Bearer ${token}`
     },
-    body: data
+    body: method == 'GET'?null:data
   });
   const json = await response.json();
 
