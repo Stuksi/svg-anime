@@ -8,28 +8,31 @@ function registration_route() {
 
   if ($method == 'POST') {
     $username = $_POST['username'];
+    if (strlen($username) < 4 || strlen($username) > 16) {
+      return render(400, ['error' => 'Username must be between 4 and 16 characters long!']);
+    }
+
     $users = $db->query("SELECT * FROM users WHERE username='$username'");
 
     if ($users->num_rows > 0) {
-      http_response_code(400);
-      echo(json_encode(['status' => 400]));
+      return render(400, ['error' => 'Username already in use!']);
     } else {
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $token = base64_encode(random_bytes(32));
+      $password = $_POST['password'];
+      if (strlen($password) < 6 || strlen($password) > 32) {
+        return render(400, ['error' => 'Password must be between 6 and 32 characters long!']);
+      }
+
+      $token = bin2hex(random_bytes(16));
 
       $db->query("INSERT INTO users (username, password, token) VALUES ('$username', '$password', '$token')");
-      error_log($db->error);
-      error_log(strlen($token));
-    
-      $user_id = $db->query("SELECT id FROM users WHERE username='$username'")->fetch_assoc();
-      http_response_code(200);
-      echo(json_encode(['token' => $token, 'user_id' => $user_id]));
+
+      render(200, ['token' => $token]);
     }
 
     return;
   }
 
-  unknown_method();
+  render_invalid_method();
 }
 
 function login_route() {
@@ -37,15 +40,12 @@ function login_route() {
   $db = db_connection();
 
   if ($method == 'GET') {
-    $id = $_GET['id'];
-    $token = $_GET['token'];
+    $token = authorization_token();
 
-    $users = $db->query("SELECT * FROM users WHERE id='$id' AND token='$token'");
-
-    if ($users->num_rows > 0) {
-      http_response_code(200);
+    if ($db->query("SELECT * FROM users WHERE token='$token'")->num_rows > 0) {
+      render(200, ['success' => 'Successfully authorized session!']);
     } else {
-      http_response_code(401);
+      render(401, ['error' => 'Unauthorized access!']);
     }
 
     return;
@@ -54,61 +54,99 @@ function login_route() {
   if ($method == 'POST') {
     $username = $_POST['username'];
     $users = $db->query("SELECT id, password FROM users WHERE username='$username'");
-    
+
     if ($users->num_rows > 0) {
       $user = $users->fetch_assoc();
       $user_id = $user['id'];
       $password = $user['password'];
 
-      if (password_verify($_POST['password'], $password))
-      {
-        $token = base64_encode(random_bytes(32));
+      if ($_POST['password'] == $password) {
+        $token = bin2hex(random_bytes(16));
         $db->query("UPDATE users SET token='$token' WHERE id=$user_id");
-  
-        echo(json_encode(['token' => $token, 'user_id' => $user_id]));
-        http_response_code(200);
-        return;
+
+        return render(200, ['token' => $token]);
       }
     }
 
-    http_response_code(401);
-    return;
+    return render(400, ['error' => 'Invalid username or password!']);
   }
 
-  unknown_method();
+  render_invalid_method();
 }
 
 function library_route() {
+  $token = authorization_token();
+  if ($token == null) {
+    return render(401, ['error' => 'Unauthorized access!']);
+  }
+
   $method = $_SERVER['REQUEST_METHOD'];
   $db = db_connection();
+  $current_user = $db->query("SELECT * FROM users WHERE token='$token'")->fetch_assoc();
+
+  if ($current_user == null) {
+    return render(401, ['error' => 'Unauthorized access!']);
+  }
 
   if ($method == 'GET') {
-    $user_id = $_GET['user_id'];
-    $library = $db->query("SELECT name, content FROM library WHERE user_id='$user_id' ORDER BY createdat")->fetch_all(MYSQLI_ASSOC);
-    echo(json_encode(['status' => 200, 'library' => $library]));
-    return;
+    $user_id = $current_user['id'];
+    $library = $db->query("SELECT name, content FROM library WHERE user_id=$user_id]' ORDER BY createdat")->fetch_all(MYSQLI_ASSOC);
+
+    return render(200, ['library' => $library]);
   }
 
   if ($method == 'POST') {
-    $user_id = (int)$_POST['user_id'];
+    $user_id = $current_user['id'];
+
     $name = $_POST['name'];
+    if (strlen($name) < 1 || strlen($name) > 16) {
+      return render(400, ['error' => 'SVG name must be between 1 and 16 characters long!']);
+    }
+
+    if($db->query("SELECT * FROM library WHERE name='$name'")->num_rows > 0) {
+      return render(400, ['error' => 'SVG name already in use!']);
+    }
+
     $content = $_POST['content'];
+    if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
+      return render(400, ['error' => 'SVG is not valid!']);
+    }
 
     $db->query("INSERT INTO library (user_id, name, content) VALUES ($user_id, '$name', '$content')");
 
-    echo(json_encode(['status' => 200]));
-    return;
+    return render(200, ['success' => "Successfully saved SVG $name!"]);
   }
 
-  unknown_method();
+  render_invalid_method();
 }
 
-function unknown_route() {
-  echo(json_encode(['status' => 404]));
+function render_invalid_route() {
+  render(404, ['error' => 'Invalid route!']);
 }
 
-function unknown_method() {
-  echo(json_encode(['status' => 400]));
+function render_invalid_method() {
+  render(400, ['error' => 'Invalid route method!']);
+}
+
+function render($status, $body) {
+  http_response_code($status);
+  echo(json_encode($body));
+}
+
+function authorization_token() {
+  if (!empty($_SERVER["Authorization"])) {
+    if (preg_match('/Bearer\s(\S+)/', $_SERVER["Authorization"], $matched_token)) {
+      return $matched_token[1];
+    }
+  }
+
+  if (!empty($_SERVER["HTTP_AUTHORIZATION"])) {
+    if (preg_match('/Bearer\s(\S+)/', $_SERVER["HTTP_AUTHORIZATION"], $matched_token)) {
+      return $matched_token[1];
+    }
+  }
+
+  return null;
 }
 
 ?>

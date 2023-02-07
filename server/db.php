@@ -22,8 +22,8 @@ function db_setup() {
     CREATE TABLE users (
       id        INT         NOT NULL AUTO_INCREMENT,
       username  VARCHAR(16) NOT NULL UNIQUE,
-      password  VARCHAR(60) NOT NULL,
-      token     VARCHAR(64),
+      password  VARCHAR(32) NOT NULL,
+      token     VARCHAR(32),
       createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id)
     )
@@ -33,7 +33,7 @@ function db_setup() {
     CREATE TABLE library (
       id        INT         NOT NULL AUTO_INCREMENT,
       user_id   INT         NOT NULL,
-      name      VARCHAR(32) NOT NULL,
+      name      VARCHAR(16) NOT NULL,
       content   TEXT        NOT NULL,
       createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id),

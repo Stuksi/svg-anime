@@ -1,24 +1,27 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Accept,Authorization');
 
 require_once 'routes.php';
 
-$uri = $_SERVER['REQUEST_URI'];
-switch (1) {
-  case preg_match('/^\/registration$/', $uri):
-    registration_route();
-    break;
-  case preg_match('/^\/login$/', $uri):
-    login_route();
-    break;
-  case preg_match('/^\/library/', $uri):
-    library_route();
-    break;
-  default:
-    unknown_route();
-    break;
-};
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri_segments = explode('/', $uri);
+
+if (count($uri_segments) > 1) {
+  return render_invalid_route();
+}
+
+$uri_location = $uri_segments[0];
+if ($uri_location == 'registration') {
+  return registration_route();
+}
+
+if ($uri_location == 'login') {
+  return login_route();
+}
+
+if ($uri_location == 'library') {
+  return library_route();
+}
 
 ?>
