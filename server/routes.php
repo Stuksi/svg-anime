@@ -118,9 +118,9 @@ function library_route() {
     }
 
     $content = $_POST['content'];
-    // if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
-    //   return render(400, ['error' => 'SVG is not valid!']);
-    // }
+    if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
+      return render(400, ['error' => 'SVG is not valid!']);
+    }
 
     $db->query("INSERT INTO library (user_id, name, content) VALUES ($user_id, '$name', '$content')");
 

@@ -1,25 +1,30 @@
-import env from './env.js';
 import { alertError, alertSuccess } from './alert.js';
 
 async function api(url, method, body) {
-  const data = new FormData();
+  let payload = null;
   const token = localStorage.getItem('token');
 
-  for (const key in body) {
-    data.append(key, body[key]);
+  if (method !== 'GET') {
+    payload = new FormData();
+
+    for (const key in body) {
+      payload.append(key, body[key]);
+    }
   }
 
-  const response = await fetch(`${env.SERVER_API}/${url}`, {
-    method: method,
+  const response = await fetch(`http://localhost:3000/${url}`, {
+    method,
     headers: {
       'Authorization': `Bearer ${token}`
     },
-    body: method == 'GET'?null:data
+    body: payload
   });
   const json = await response.json();
 
   if (response.status < 200 || response.status > 299) {
-    alertError(json.error);
+    if (response.status != 401) {
+      alertError(json.error);
+    }
   }
 
   if (json.success !== undefined) {

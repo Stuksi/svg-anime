@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <script src="../js/authorization.js"></script> -->
-        <title>svg-anime</title>
-        <link rel="stylesheet"  type="text/css" href="../css/library.css">
-        <link rel="stylesheet"  type="text/css" href="../css/nav-bar.css">
-    </head>
-    <body>
-      <script type="module" src="../js/get-svgs.js"></script>
-        <nav class="navbar">
-            <div class="title">SVG-Anime</div>
-            <div class="navbar-links">
-              <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="#">Library</a></li>
-              </ul>
-            </div>
-        </nav>
-        <div id="svg-gallery"></div>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module" src="../js/authorization.js"></script>
+
+    <link rel="stylesheet"  type="text/css" href="../css/library.css">
+    <link rel="stylesheet"  type="text/css" href="../css/nav-bar.css">
+
+    <title>SVG-Anime</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="title">SVG-Anime</div>
+
+      <div class="navbar-links">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#">Library</a></li>
+          <li><a id="logout" href="#">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="svg-gallery"></div>
+
+    <script type="module" src="../js/logout.js"></script>
+    <script type="module" src="../js/get-svgs.js"></script>
+  </body>
 </html>

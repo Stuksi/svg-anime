@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet"  type="text/css" href="../css/register.css">
-  <link rel="stylesheet"  type="text/css" href="../css/alert.css">
+    <script type="module" src="../js/authorization.js"></script>
 
-  <!-- <script type="module" src="../js/authorization.js"></script> -->
+    <link rel="stylesheet"  type="text/css" href="../css/register.css">
+    <link rel="stylesheet"  type="text/css" href="../css/alert.css">
 
-  <title>SVG-Anime</title>
-</head>
-<body>
-  <script type="module" src="../js/register.js"></script>
-  <div class="registerPage">
-    <form id="registration">
-      <h2>Create Your Account</h2>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" />
-      </div>
-      <input type="submit" value="Register" class="submit-btn"/>
-      <span class="message">Already registered? <a href="login.html">Sign In</a></span>
-    </form>
-  </div>
-</body>
+    <title>SVG-Anime</title>
+  </head>
+  <body>
+    <script type="module" src="../js/register.js"></script>
+    <div class="registerPage">
+      <form id="registration">
+        <h2>Create Your Account</h2>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" />
+        </div>
+
+        <input type="submit" value="Register" class="submit-btn"/>
+
+        <span class="message">Already registered? <a href="login.html">Sign In</a></span>
+      </form>
+    </div>
+  </body>
 </html>

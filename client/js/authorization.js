@@ -1,25 +1,20 @@
-const token = localStorage.getItem('token');
+import { get } from './api.js';
 
-if (token === null) {
-  if (!location.href.match(/.*\/html\/authentication.html$/)) {
-    location.href = '../html/authentication.html';
+async function authorize() {
+  const response = await get('login');
+  const forbidden = location.href.includes('login.html') || location.href.includes('register.html');
+  console.log(response);
+  if (response.success !== undefined) {
+    if (forbidden) {
+      location.href = '../html/home.html';
+    }
+
+    return;
   }
-} else {
-  fetch(`${env.SERVER_API}/login`, {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  }).then((response) => {
-    const authorization = JSON.parse(response);
 
-    if (authorization['status'] === 401) {
-      location.href = '../html/authentication.html';
-    } else {
-      if (location.href.match(/.*\/html\/authentication.html$/)) {
-        location.href = '../html/home.html';
-      }
-    }
-  });
+  if (!forbidden) {
+    location.href = '../html/login.html';
+  }
 }
+
+await authorize();
