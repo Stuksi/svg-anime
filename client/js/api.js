@@ -27,10 +27,6 @@ async function api(url, method, body) {
     }
   }
 
-  if (json.success !== undefined) {
-    alertSuccess(json.success);
-  }
-
   return json;
 }
 

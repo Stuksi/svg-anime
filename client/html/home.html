@@ -8,38 +8,41 @@
 
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="../css/nav-bar.css">
+    <link rel="stylesheet"  type="text/css" href="../css/alert.css">
 
     <title>svg-anime</title>
   </head>
 
   <body>
-    <nav class="navbar">
-      <div class="title">SVG-Anime</div>
-      <div class="navbar-links">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="library.html">Library</a></li>
-          <li><a id="logout" href="#">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div id="root">
+      <nav class="navbar">
+        <div class="title">SVG-Anime</div>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="library.html">Library</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
 
-    <div id="container">
-      <div id="code-section">
-        <textarea id="code-input" placeholder="Type SVG code here"></textarea>
-      </div>
+      <div id="container">
+        <div id="code-section">
+          <textarea id="code-input" placeholder="Type SVG code here"></textarea>
+        </div>
 
-      <div id="svg-section">
-        <section id="svg-render"></section>
-        <h2>Control Panel</h2>
-        <section id="svg-control-panel">
-          <button id="saveSVG" role="button" onclick="saveSVG()">Save SVG</button>
-        </section>
+        <div id="svg-section">
+          <section id="svg-render"></section>
+          <h2>Control Panel</h2>
+          <section id="svg-control-panel">
+            <button id="save-svg" role="button">Save SVG</button>
+          </section>
+        </div>
       </div>
     </div>
 
     <script type="module" src="../js/logout.js"></script>
-    <script type="module" src="../js/save-svj.js"></script>
+    <script type="module" src="../js/save-svg.js"></script>
     <script src="../js/render.js"></script>
   </body>
 </html>

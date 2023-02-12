@@ -8,23 +8,26 @@
 
     <link rel="stylesheet"  type="text/css" href="../css/library.css">
     <link rel="stylesheet"  type="text/css" href="../css/nav-bar.css">
+    <link rel="stylesheet"  type="text/css" href="../css/alert.css">
 
     <title>SVG-Anime</title>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="title">SVG-Anime</div>
+    <div id="root">
+      <nav class="navbar">
+        <div class="title">SVG-Anime</div>
 
-      <div class="navbar-links">
-        <ul>
-          <li><a href="home.html">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li><a id="logout" href="#">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
 
-    <div id="svg-gallery"></div>
+      <div id="svg-gallery"></div>
+    </div>
 
     <script type="module" src="../js/logout.js"></script>
     <script type="module" src="../js/get-svgs.js"></script>

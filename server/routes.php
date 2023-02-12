@@ -118,7 +118,7 @@ function library_route() {
     }
 
     $content = $_POST['content'];
-    if (!preg_match('/^<svg.*<\/svg>$/', $content)) {
+    if (!preg_match('/^<svg(:? .*?)>.*<\/svg>$/s', $content)) {
       return render(400, ['error' => 'SVG is not valid!']);
     }
 
