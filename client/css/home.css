@@ -28,13 +28,13 @@ body {
     height: 100vh;
 }
 
-#code-section {
+#code {
     width: 50%;
     padding: 1em;
     box-sizing: border-box;
 }
 
-#code-input {
+#input {
     font-size: 20px;
     width: 100%;
     height: 100%;
@@ -53,7 +53,7 @@ body {
     box-sizing: border-box;
 }
 
-#svg-render {
+#canvas {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,7 +63,7 @@ body {
     background-color: white;
 }
 
-#svg-control-panel {
+#control {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,12 +75,12 @@ body {
     background-color: white;
 }
 
-#svg-control-panel h2 {
+#control h2 {
     text-align: center;
     margin-bottom: 1em;
 }
 
-#save-svg {
+#save {
 
     border: 2px solid grey;
     border-radius: 1.5rem;
@@ -103,7 +103,7 @@ body {
     touch-action: manipulation;
 }
 
-#save-svg:hover {
+#save:hover {
     background-color: #1e293b;
     color: #fff;
 }

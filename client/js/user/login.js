@@ -1,6 +1,9 @@
 import { post } from '../api.js';
+import { alertError } from '../alert.js';
 
-async function login() {
+async function login(event) {
+  event.preventDefault();
+
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
@@ -17,7 +20,4 @@ async function login() {
   }
 }
 
-document.getElementById('login').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  await login();
-});
+document.getElementById('login').addEventListener('submit', login);

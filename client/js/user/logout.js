@@ -1,9 +1,8 @@
-function logout() {
+function logout(event) {
+  event.preventDefault();
+
   localStorage.removeItem('token');
   location.href = '../html/login.html';
 }
 
-document.getElementById('logout').addEventListener('click', (event) => {
-  event.preventDefault();
-  logout();
-});
+document.getElementById('logout').addEventListener('click', logout);

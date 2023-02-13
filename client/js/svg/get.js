@@ -10,7 +10,7 @@ function htmlToElement(html) {
 function registerClick() {
     let children = this.children;
     let codeInput= children[1].outerHTML;
-    localStorage.setItem('codeInput', codeInput);
+    localStorage.setItem('input', codeInput);
     document.location.href = '../html/home.html';
 }
 

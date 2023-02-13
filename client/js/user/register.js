@@ -1,7 +1,9 @@
 import { post } from '../api.js';
 import { alertError } from '../alert.js';
 
-async function register() {
+async function register(event) {
+  event.preventDefault();
+
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
   const passwordConfirmation = document.getElementById('confirm-password').value;
@@ -24,7 +26,4 @@ async function register() {
   }
 }
 
-document.getElementById('registration').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  await register();
-});
+document.getElementById('registration').addEventListener('submit', register);

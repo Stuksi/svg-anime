@@ -6,9 +6,10 @@
 
     <script type="module" src="../js/user/authorization.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
     <link rel="stylesheet" type="text/css" href="../css/nav-bar.css">
-    <link rel="stylesheet"  type="text/css" href="../css/alert.css">
+    <link rel="stylesheet" type="text/css" href="../css/alert.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
 
     <title>SVG-Anime</title>
   </head>
@@ -27,22 +28,23 @@
       </nav>
 
       <div id="container">
-        <div id="code-section">
-          <textarea id="code-input" placeholder="Type SVG code here"></textarea>
+        <div id="code">
+          <textarea id="input" placeholder="Type SVG code here"></textarea>
         </div>
 
         <div id="svg-section">
-          <section id="svg-render"></section>
+          <div id="canvas"></div>
           <h2>Control Panel</h2>
-          <section id="svg-control-panel">
-            <button id="save-svg" role="button">Save SVG</button>
-          </section>
+          <div id="control">
+            <button id="save" role="button">Save SVG</button>
+            <button id="animate" role="button">Animate</button>
+          </div>
         </div>
       </div>
     </div>
 
     <script type="module" src="../js/user/logout.js"></script>
-    <script type="module" src="../js/svg/render.js"></script>
+    <script type="module" src="../js/svg/canvas.js"></script>
     <script type="module" src="../js/svg/animate.js"></script>
     <script type="module" src="../js/svg/save.js"></script>
   </body>
