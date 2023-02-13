@@ -1,4 +1,4 @@
-import { post } from './api.js';
+import { post } from '../api.js';
 
 async function login() {
   const username = document.getElementById('username').value;

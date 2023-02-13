@@ -1,4 +1,4 @@
-import { get } from './api.js';
+import { get } from '../api.js';
 
 function htmlToElement(html) {
     let template = document.createElement('template');

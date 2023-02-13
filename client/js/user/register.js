@@ -1,5 +1,5 @@
-import { post } from './api.js';
-import { alertError } from './alert.js';
+import { post } from '../api.js';
+import { alertError } from '../alert.js';
 
 async function register() {
   const username = document.getElementById('username').value;

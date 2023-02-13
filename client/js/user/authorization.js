@@ -1,4 +1,4 @@
-import { get } from './api.js';
+import { get } from '../api.js';
 
 async function authorize() {
   const response = await get('login');
