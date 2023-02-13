@@ -4,7 +4,7 @@ import { post } from '../api.js';
 async function save(event) {
   event.preventDefault();
 
-  const content = document.getElementById('code-input').value.trim();
+  const content = document.getElementById('input').value.trim();
   const name = prompt("Enter name for the SVG"); // Change for better ui
 
   const response = await post('library', {name,  content});

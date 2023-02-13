@@ -1,109 +1,63 @@
-html,body {
-    box-sizing: border-box;
-    background-color:#e6fcf5;
-    font-family: Helvetica, sans-serif;
-    height:100%;
-    width:100%;
-}
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
-
-body {
-    background-color: #f1f1f1;
-}
-
-#root {
-    width: 100%;
-    height: 100%;
-}
-
-#container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-}
-
-#code {
-    width: 50%;
-    padding: 1em;
-    box-sizing: border-box;
-}
-
-#input {
-    font-size: 20px;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    resize: none;
-    border: 2px solid grey;
-    border-radius: 5px;
-}
-
-#svg-section {
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-    width: 50%;
-    padding: 1em;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 #canvas {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
-    border: 2px solid grey;
-    border-radius: 5px;
-    background-color: white;
+  width: 100%;
+  padding: 0.75rem;
+
+  border-radius: 0.75rem;
+  background-color: rgba(67, 63, 63, 0.25);
 }
 
-#control {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid grey;
-    border-radius: 5px;
-    padding: 1em;
-    flex-grow: 1;
-    height: 50%;
-    background-color: white;
+#input {
+  height: 65%;
+  padding: 0.75rem;
+
+  border-radius: 0.75rem;
+  background-color: rgba(67, 63, 63, 0.25);
+  color: rgba(14, 11, 11, 0.85);
+  font-size: 1.275rem;
+
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
 }
 
-#control h2 {
-    text-align: center;
-    margin-bottom: 1em;
+.actions {
+  height: 35%;
+  padding: 0.75rem;
+
+  border-radius: 0.75rem;
+  background-color: rgba(67, 63, 63, 0.25);
 }
 
-#save {
+.main-actions {
+  display: flex;
+  justify-content: space-between;
 
-    border: 2px solid grey;
-    border-radius: 1.5rem;
-    box-sizing: border-box;
-    color: #0d172a;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Basier circle", "Helvetica Neue",Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1;
-    padding: 1rem 1.6rem;
-    text-align: center;
-    text-decoration: none #0d172a solid;
-    text-decoration-thickness: auto;
-    transition: all .1s cubic-bezier(.4, 0, .2, 1);
-    box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+  width: 100%;
+  padding-bottom: 1.5rem;
+
+  border-bottom: 2px rgba(223, 155, 228, 0.833) solid;
 }
 
-#save:hover {
-    background-color: #1e293b;
-    color: #fff;
+.button {
+  width: 10rem;
+  padding: 0.25rem;
+
+  border-radius: 0.25rem;
+  background: rgba(223, 155, 228, 0.833);
+  color: rgb(255, 255, 255);
+  font-size: 1.275rem;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

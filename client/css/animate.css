@@ -1,7 +1,9 @@
 .animate {
   fill: none;
+
   stroke: #000;
   stroke-width: 2;
+
   stroke-miterlimit: 10;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;

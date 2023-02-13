@@ -1,4 +1,4 @@
-function animateAll(event) {
+function animate(event) {
   event.preventDefault();
 
   const canvas = document.getElementById('canvas');
@@ -7,31 +7,17 @@ function animateAll(event) {
   object.remove();
 
   const paths = object.querySelectorAll('path');
-  paths.forEach((path, index) => animateSingle(path, (index + 1) * 0.5));
+  paths.forEach((path, index) => {
+    const length = path.getTotalLength();
+
+    path.classList.add('animate');
+
+    path.style.animation = `stroke-offset 0.5s linear forwards ${(index + 1) * 0.5}s`;
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+  });
 
   canvas.appendChild(object);
 }
 
-function animateSingle(path, time) {
-  const length = path.getTotalLength();
-
-  path.classList.add('animate');
-
-  path.style.animation = `stroke-offset 0.5s linear forwards ${time}s`;
-  path.style.strokeDasharray = length;
-  path.style.strokeDashoffset = length;
-}
-
-document.getElementById('animate').addEventListener('click', animateAll);
-
-document.getElementById('canvas')?.querySelectorAll('path').forEach((path) => {
-  const control = document.getElementById('control');
-  const button = document.createElement('button');
-
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-    animateSingle(path, 0.5);
-  })
-
-  control.appendChild(button);
-});
+document.getElementById('animate').addEventListener('click', animate);

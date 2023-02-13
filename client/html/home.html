@@ -6,8 +6,9 @@
 
     <script type="module" src="../js/user/authorization.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../css/nav.css">
     <link rel="stylesheet" type="text/css" href="../css/alert.css">
     <link rel="stylesheet" type="text/css" href="../css/animate.css">
 
@@ -16,35 +17,33 @@
 
   <body>
     <div id="root">
-      <nav class="navbar">
-        <div class="title">SVG-Anime</div>
-        <div class="navbar-links">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="library.html">Library</a></li>
-            <li><a id="logout" href="#">Logout</a></li>
-          </ul>
+      <div class="nav">
+        <div class="left">
+          <input id="home" class="image" type="image" src="https://www.svgrepo.com/show/216785/home-house.svg" />
+          <input id="library" class="image" type="image" src="https://www.svgrepo.com/show/107373/library.svg" />
         </div>
-      </nav>
+        <input id="logout" class="image" type="image" src="https://www.svgrepo.com/show/67681/logout.svg" />
+      </div>
 
-      <div id="container">
-        <div id="code">
-          <textarea id="input" placeholder="Type SVG code here"></textarea>
-        </div>
+      <div class="main">
+        <div class="controls">
+          <textarea id="input" placeholder="Enter SVG here..."></textarea>
 
-        <div id="svg-section">
-          <div id="canvas"></div>
-          <h2>Control Panel</h2>
-          <div id="control">
-            <button id="save" role="button">Save SVG</button>
-            <button id="animate" role="button">Animate</button>
+          <div class="actions">
+            <div class="main-actions">
+              <button class="button" id="save">Save</button>
+              <button class="button" id="animate">Animate</button>
+            </div>
+            <div class="secondary-actions"></div>
           </div>
         </div>
+
+        <div id="canvas"></div>
       </div>
     </div>
 
-    <script type="module" src="../js/user/logout.js"></script>
-    <script type="module" src="../js/svg/canvas.js"></script>
+    <script type="module" src="../js/navigate.js"></script>
+    <script type="module" src="../js/svg/render.js"></script>
     <script type="module" src="../js/svg/animate.js"></script>
     <script type="module" src="../js/svg/save.js"></script>
   </body>

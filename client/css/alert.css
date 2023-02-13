@@ -1,12 +1,10 @@
 #alert {
   position: absolute;
   top: 5vh;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70vw;
+
   height: 5vh;
+  width: 45vw;
+
   opacity: 0;
   animation: fade 2s linear;
 }
