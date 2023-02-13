@@ -34,7 +34,7 @@ function db_setup() {
       id        INT         NOT NULL AUTO_INCREMENT,
       user_id   INT         NOT NULL,
       name      VARCHAR(16) NOT NULL,
-      content   TEXT        NOT NULL,
+      content   LONGTEXT    NOT NULL,
       createdat TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY(id),
       FOREIGN KEY (user_id) REFERENCES users(id)

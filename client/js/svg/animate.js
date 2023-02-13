@@ -2,6 +2,7 @@ function animate(event) {
   event.preventDefault();
 
   const canvas = document.getElementById('canvas');
+  const speed = (100 - document.getElementById('speed').value) / 100 + 0.01;
 
   const object = canvas.querySelector('svg');
   object.remove();
@@ -12,7 +13,7 @@ function animate(event) {
 
     path.classList.add('animate');
 
-    path.style.animation = `stroke-offset 0.5s linear forwards ${(index + 1) * 0.5}s`;
+    path.style.animation = `stroke-offset ${speed}s linear forwards ${(index + 1) * speed}s`;
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
   });

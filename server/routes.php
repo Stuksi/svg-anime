@@ -113,7 +113,7 @@ function library_route() {
       return render(400, ['error' => 'SVG name must be between 1 and 16 characters long!']);
     }
 
-    if($db->query("SELECT * FROM library WHERE name='$name'")->num_rows > 0) {
+    if($db->query("SELECT * FROM library WHERE name='$name' AND user_id=$user_id")->num_rows > 0) {
       return render(400, ['error' => 'SVG name already in use!']);
     }
 
@@ -124,7 +124,7 @@ function library_route() {
 
     $db->query("INSERT INTO library (user_id, name, content) VALUES ($user_id, '$name', '$content')");
 
-    return render(200, ['success' => "Successfully saved SVG $name!"]);
+    return render(200, ['success' => "Successfully saved $name!"]);
   }
 
   render_invalid_method();
