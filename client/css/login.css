@@ -1,17 +1,5 @@
-html,body {
-    box-sizing: border-box;
-    background-color:#e6fcf5;
-    font-family: Helvetica, sans-serif;
-    height:100%;
-    width:100%;
-}
-
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #334;
-    margin: 0;
+.main {
+    width: 25vw;
 }
 
 form {

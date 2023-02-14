@@ -7,35 +7,39 @@
 
     <script type="module" src="../js/user/authorization.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../css/register.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/alert.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/register.css">
 
     <title>SVG-Anime</title>
   </head>
   <body>
-    <div class="registerPage">
-      <form id="registration">
-        <h2>Create Your Account</h2>
+    <div id="root">
+      <div class="main">
+        <form id="registration">
+          <h2>Create Your Account</h2>
 
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" />
-        </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" />
+          </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" />
-        </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" />
+          </div>
 
-        <div class="form-group">
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" />
-        </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" />
+          </div>
 
-        <input type="submit" value="Register" class="submit-btn"/>
+          <input type="submit" value="Register" class="submit-btn"/>
 
-        <span class="message">Already registered? <a href="login.html">Sign In</a></span>
-      </form>
+          <span class="message">Already registered? <a href="login.html">Sign In</a></span>
+        </form>
+      </div>
     </div>
 
     <script type="module" src="../js/user/register.js"></script>

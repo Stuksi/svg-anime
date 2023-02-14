@@ -13,7 +13,7 @@ function alert(type, message) {
   const element = alertElement(message);
   element.classList.add(`alert-${type}`);
 
-  document.body.appendChild(element);
+  document.getElementById('root').appendChild(element);
 }
 
 export function alertError(message) {
