@@ -12,7 +12,7 @@ async function api(url, method, body) {
     }
   }
 
-  const response = await fetch(`http://localhost:3000/${url}`, {
+  const response = await fetch(`http://localhost:3000/server/router.php/${url}`, {
     method,
     headers: {
       'Authorization': `Bearer ${token}`

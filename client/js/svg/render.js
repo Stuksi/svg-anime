@@ -28,8 +28,8 @@ function resize() {
   const canvas = document.getElementById('canvas');
   const object = canvas.querySelector('svg');
 
-  object.setAttribute('height', '100%');
-  object.setAttribute('width', '100%');
+  object?.setAttribute('height', '100%');
+  object?.setAttribute('width', '100%');
 }
 
 document.addEventListener('DOMContentLoaded', preload);
