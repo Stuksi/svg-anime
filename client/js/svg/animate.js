@@ -12,13 +12,16 @@ function animate(event) {
     const length = path.getTotalLength();
     const strokeColor = path.getAttribute("stroke");
     const strokeWidth = path.getAttribute("stroke-width");
+    const fillColor = path.getAttribute("fill");
+
+    const stroke = (strokeColor === null  || strokeColor === 'transparent') ? fillColor || '#000' : strokeColor;
 
     path.classList.add('animate');
 
     path.style.animation = `stroke-offset ${speed}s linear forwards ${(index + 1) * speed}s`;
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
-    path.style.stroke = strokeColor;
+    path.style.stroke = stroke;
     path.style.strokeWidth = strokeWidth;
   });
 
